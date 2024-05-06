@@ -55,6 +55,33 @@ $hotels = [
 
 <body>
 
+    <form action="" method="GET">
+
+        <?php
+
+        ?>
+        <label for="parking">Parcheggio</label>
+        <select name="parking" id="parking">
+            <option value="">-</option>
+            <option value="No">No</option>
+            <option value="Si">Sì</option>
+        </select>
+
+
+        <label for="vote"> Voto minimo</label>
+        <select name="vote" id="vote">
+            <option value="">-</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+
+
+        <button>Cerca</button>
+    </form>
+
     <table class="table">
         <thead>
             <tr>
@@ -67,48 +94,71 @@ $hotels = [
         </thead>
         <tbody>
 
-<?php
+            <?php
 
             for ($i = 0; $i < count($hotels); $i++) {
                 $hotel = $hotels[$i];
                 // var_dump($hotel);
                 $name = $hotel['name'];
                 $description = $hotel['description'];
-                
-                $parking = $hotel['parking'];
-                if ($parking === true) {
-                    $parkingCheck = "Si";
-                } else {
-                    $parkingCheck = "No";
-                }
-                ;
-                
+
+                // $parking = $hotel['parking'];
+                // if ($parking === true) {
+                //     $parkingCheck = "Si";
+                // } else {
+                //     $parkingCheck = "No";
+                // };
+            
+                $parking = $hotel['parking'] ? 'Si' : 'No';
+
                 $vote = $hotel['vote'];
                 // var_dump($vote);
                 $distance = $hotel['distance_to_center'];
                 
-                // var_dump($name, $vote, $description, $parking, $distance);
-                ?>
-               
-                <tr>
-                    <td><?php echo $name; ?></th>
-                    <td><?php echo $description; ?></td>
-                    <td><?php echo $parkingCheck; ?></td>
-                    <td><?php echo $vote; ?>/5</td>
-                    <td><?php echo $distance; ?> Km</td>
-                </tr>
-             <?php   
+
+                $parking_search = $_GET['parking'] ?? '';
+                // var_dump($parking_search);
+
+                $vote_search = $_GET['vote'] ?? '';
+                // var_dump($vote_search);
+            
+
+                
+
+                if (($vote_search <= $vote || $vote_search === '') && ($parking_search === $parking || $parking_search === '') ) {
+                    ?>
+
+                    <tr>
+                        <td><?php echo $name; ?></td>
+                        <td><?php echo $description; ?></td>
+                        <td><?php echo $parking; ?></td>
+                        <td><?php echo $vote; ?>/5</td>
+                        <td><?php echo $distance; ?> Km</td>
+                    </tr>
+                    <?php
+                } elseif ($vote_search === '' && $parking_search === '') {
+                    ?>
+
+                    <tr>
+                        <td><?php echo $name; ?></td>
+                        <td><?php echo $description; ?></td>
+                        <td><?php echo $parking; ?></td>
+                        <td><?php echo $vote; ?>/5</td>
+                        <td><?php echo $distance; ?> Km</td>
+                    </tr>
+                    <?php
+                }
             }
             ?>
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 
-    </body>
+</body>
 
-    </html>
+</html>
 
-    <?php
+<?php
 
 
 

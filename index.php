@@ -55,34 +55,39 @@ $hotels = [
 
 <body>
 
-    <form action="" method="GET">
+    <form action="" method="GET" class="d-flex justify-content-center gap-4 m-4">
 
         <?php
 
         ?>
-        <label for="parking">Parcheggio</label>
-        <select name="parking" id="parking">
-            <option value="">-</option>
-            <option value="No">No</option>
-            <option value="Si">Sì</option>
-        </select>
+        <div>
+            <label for="parking">Parcheggio</label>
+            <select name="parking" id="parking">
+                <option value="">-</option>
+                <option value="No">No</option>
+                <option value="Si">Sì</option>
+            </select>
+        </div>
 
 
-        <label for="vote"> Voto minimo</label>
-        <select name="vote" id="vote">
-            <option value="">-</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
+        <div>
+            <label for="vote"> Voto minimo</label>
+            <select name="vote" id="vote">
+                <option value="">-</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+
 
 
         <button>Cerca</button>
     </form>
 
-    <table class="table">
+    <table class="table m-4">
         <thead>
             <tr>
                 <th scope="col">Nome</th>
@@ -114,25 +119,23 @@ $hotels = [
                 $vote = $hotel['vote'];
                 // var_dump($vote);
                 $distance = $hotel['distance_to_center'];
-                
+
 
                 $parking_search = $_GET['parking'] ?? '';
                 // var_dump($parking_search);
-
+            
                 $vote_search = $_GET['vote'] ?? '';
                 // var_dump($vote_search);
-            
 
-                
 
-                if (($vote_search <= $vote || $vote_search === '') && ($parking_search === $parking || $parking_search === '') ) {
+                if (($vote_search <= $vote || $vote_search === '') && ($parking_search === $parking || $parking_search === '')) {
                     ?>
 
                     <tr>
                         <td><?php echo $name; ?></td>
                         <td><?php echo $description; ?></td>
                         <td><?php echo $parking; ?></td>
-                        <td><?php echo $vote; ?>/5</td>
+                        <td><?php echo $vote; ?> su 5</td>
                         <td><?php echo $distance; ?> Km</td>
                     </tr>
                     <?php
@@ -143,7 +146,7 @@ $hotels = [
                         <td><?php echo $name; ?></td>
                         <td><?php echo $description; ?></td>
                         <td><?php echo $parking; ?></td>
-                        <td><?php echo $vote; ?>/5</td>
+                        <td><?php echo $vote; ?> su 5</td>
                         <td><?php echo $distance; ?> Km</td>
                     </tr>
                     <?php
